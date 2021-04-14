@@ -2,6 +2,8 @@ library(httr)
 library(jsonlite)
 library(tidyr)
 library(dplyr)
+library(git2r)
+
 portUrl <- "https://covid-19.sixfold.com/persistent/ports.json"
 crossingUrl <- "https://covid-19.sixfold.com/persistent/data.json"
 seaCrossingUrl <- "https://live.sixfold.com/persistent/port_crossings.json"
@@ -91,6 +93,24 @@ repeat {
   saveRDS(data, file = paste0("archive/delayData_", 
                               gsub("^.{2}", "", gsub(".{2}$", "", gsub(":", "", gsub("BST", "", gsub(" ", "", gsub("-","", Sys.time()))))))
                               , ".RDS")) # Back up
+  
+  
+  #### send to git
+  git2r::config(user.name = "Nutterules",user.email = "63188954+Nutterules@users.noreply.github.com")
+  
+  # Check git status.
+  git2r::status()
+  
+  # Add and commit changes. 
+  git2r::add(path = "*.RDS")
+  git2r::commit(message = gsub(" ", "_", paste0("dataUpdate_", Sys.time())))
+  
+  # Push changes to github.
+  password <- cred_user_pass(username = "Nutterules", password = "Jz570906C@Rumpole1!")
+  git2r::push(credentials = password)
+  
+  
+  ###
   Sys.sleep(gap * 60)
 }
 
