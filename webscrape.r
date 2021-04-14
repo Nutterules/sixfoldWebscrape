@@ -5,7 +5,7 @@ library(dplyr)
 portUrl <- "https://covid-19.sixfold.com/persistent/ports.json"
 crossingUrl <- "https://covid-19.sixfold.com/persistent/data.json"
 seaCrossingUrl <- "https://live.sixfold.com/persistent/port_crossings.json"
-setwd("C:/Users/hugha/OneDrive - York St John University/Apprenticeship/RTIs/Sixfold/sixfold_webscrape")
+# setwd("C:/Users/hugha/OneDrive - York St John University/Apprenticeship/RTIs/Sixfold/sixfold_webscrape")
 gap <- 25 # Wait for 'gap' minutes before next data request
 
 if (!file.exists("delayData.RDS")) {
